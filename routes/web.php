@@ -2,6 +2,8 @@
 
 /** @var \Laravel\Lumen\Routing\Router $router */
 
+use Illuminate\Support\Facades\Storage;
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -14,5 +16,10 @@
 */
 
 $router->get('/', function () use ($router) {
-    return view('index', ['content' => 'Hi, there']);
+    $assets = json_decode(Storage::disk('local')->get('.vite/manifest.json'), true);
+
+    return view('index', [
+        'content' => 'Hi there',
+        'assets' => $assets,
+    ]);
 });

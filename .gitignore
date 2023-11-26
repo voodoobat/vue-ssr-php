@@ -4,3 +4,8 @@ Homestead.json
 Homestead.yaml
 .env
 .phpunit.result.cache
+
+.vscode/*
+!.vscode/extensions.json
+
+public/assets

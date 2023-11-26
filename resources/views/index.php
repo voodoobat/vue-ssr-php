@@ -6,6 +6,9 @@
     <title>Vue SSR</title>
 </head>
 <body>
-    <?php echo $content ?>
+    <div id="app">
+        <?php echo $content ?>
+    </div>
+    <script src="/<?php echo $assets['src/main.ts']['file'] ?>"></script>
 </body>
 </html>
