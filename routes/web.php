@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Storage;
 | and give it the Closure to call when that URI is requested.
 |
 */
-$data = ['message' => 'message from server'];
+$data = ['message' => 'message from server', 'initialClickCount' => 0];
 
 $router->get('/', function () use ($data) {
     $json = json_encode($data);

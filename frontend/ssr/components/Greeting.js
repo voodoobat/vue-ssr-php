@@ -1,10 +1,12 @@
-import { defineComponent } from 'vue'
+
+import { computed, defineComponent, ref } from 'vue'
 import BaseButton from './base/BaseButton.js'
 
 export default defineComponent({
     template: `
     <h1>{{ message }}</h1>
-    <BaseButton @click="sayHello">Click me!</BaseButton>
+    <p>{{ clickCountMessage }}</p>
+    <BaseButton @click="clickCount++">Click me!</BaseButton>
 `,
     name: 'Greeting',
     components: {
@@ -13,14 +15,26 @@ export default defineComponent({
     props: {
         message: {
             type: String,
-            default: 'Hello, world',
+            default: '',
+        },
+        initialClickCount: {
+            type: Number,
+            default: 0,
         },
     },
-    setup() {
-        const sayHello = () => alert('Hello!')
+    setup({ initialClickCount }) {
+        const clickCount = ref(initialClickCount)
+        const clickCountMessage = computed(() => {
+            if (clickCount.value < 1) {
+                return 'no clicks'
+            }
+
+            return `${clickCount.value} clicks`
+        })
 
         return {
-            sayHello,
+            clickCount,
+            clickCountMessage,
         }
     },
 })
