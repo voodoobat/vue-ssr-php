@@ -16,7 +16,7 @@ export default defineComponent({
     props: {
         message: {
             type: String,
-            default: 'Hello, world',
+            default: '',
         },
     },
     setup() {
@@ -25,6 +25,6 @@ export default defineComponent({
         return {
             sayHello,
         }
-    }
+    },
 })
 </script>

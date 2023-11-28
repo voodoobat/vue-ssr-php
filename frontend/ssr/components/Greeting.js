@@ -1,4 +1,3 @@
-
 import { defineComponent } from 'vue'
 import BaseButton from './base/BaseButton.js'
 
@@ -23,5 +22,5 @@ export default defineComponent({
         return {
             sayHello,
         }
-    }
+    },
 })

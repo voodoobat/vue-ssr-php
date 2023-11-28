@@ -10,7 +10,11 @@ const app = createSSRApp({
     data: () => ({
         props: argv.data ? JSON.parse(argv.data) : {},
     }),
-    template: `<Component v-bind="props" />`,
+    template: `
+        <div data-component="${argv.component}">
+            <Component v-bind="props" />
+        </div>
+    `,
 })
 
 renderToString(app).then(console.log)
