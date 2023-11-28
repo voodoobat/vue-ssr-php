@@ -7,7 +7,7 @@
 </head>
 <body>
     <div id="app">
-        <?php echo $content ?>
+        <?php echo $component ?>
     </div>
     <script src="/<?php echo $assets['src/main.ts']['file'] ?>"></script>
 </body>

@@ -20,7 +20,7 @@ $router->get('/', function () use ($router) {
     $data = json_encode(['message' => 'message from server']);
     $assets = json_decode(Storage::disk('local')->get('.vite/manifest.json'), true);
     $path2script = realpath('../frontend/hydrate-ssr.js');
-    $template = shell_exec('node ' . $path2script . ' --component Greeting' . ' --data ' . '\'' . $data . '\'');
+    $component = shell_exec('node ' . $path2script . ' --component Greeting' . ' --data ' . '\'' . $data . '\'');
 
-    return $template;
+    return view('home', ['component' => $component, 'assets' => $assets]);
 });

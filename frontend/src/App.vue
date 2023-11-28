@@ -1,7 +1,9 @@
 <template>
-    <h1>{{ greeting }}</h1>
+    <Greeting :message="greeting" />
 </template>
 
 <script setup lang="ts">
-const greeting = 'Hi there'
+import Greeting from './components/Greeting.vue'
+
+const greeting = 'Hello from client'
 </script>
