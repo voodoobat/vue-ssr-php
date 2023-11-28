@@ -6,15 +6,18 @@
     "scripts": {
         "dev": "vite",
         "build": "vue-tsc && vite build && cp -r ../public/.vite ../storage/app",
-        "preview": "vite preview"
+        "preview": "vite preview",
+        "ssr": "ts-node ./compile-ssr.ts"
     },
     "dependencies": {
         "vue": "^3.3.8"
     },
     "devDependencies": {
         "@vitejs/plugin-vue": "^4.5.0",
+        "ts-node": "^10.9.1",
         "typescript": "^5.2.2",
         "vite": "^5.0.0",
-        "vue-tsc": "^1.8.22"
+        "vue-tsc": "^1.8.22",
+        "yargs": "^17.7.2"
     }
 }

@@ -2,6 +2,7 @@
 
 /** @var \Laravel\Lumen\Routing\Router $router */
 
+// use Illuminate\Support\Facades\Process;
 use Illuminate\Support\Facades\Storage;
 
 /*
@@ -16,10 +17,10 @@ use Illuminate\Support\Facades\Storage;
 */
 
 $router->get('/', function () use ($router) {
+    $data = json_encode(['message' => 'message from server']);
     $assets = json_decode(Storage::disk('local')->get('.vite/manifest.json'), true);
+    $path2script = realpath('../frontend/hydrate-ssr.js');
+    $template = shell_exec('node ' . $path2script . ' --component Greeting' . ' --data ' . '\'' . $data . '\'');
 
-    return view('index', [
-        'content' => 'Hi there',
-        'assets' => $assets,
-    ]);
+    return $template;
 });
