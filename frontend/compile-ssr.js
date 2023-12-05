@@ -24,11 +24,7 @@ parsed.body.forEach((node) => {
         node.declaration.arguments[0].properties.push({
             type: 'Property',
             key: { type: 'Identifier', name: 'template' },
-            computed: false,
             value: { type: 'Literal', value: cleanTemplate },
-            kind: 'init',
-            method: false,
-            shorthand: false,
         })
     }
 })
