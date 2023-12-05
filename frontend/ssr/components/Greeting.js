@@ -3,7 +3,7 @@ import {
     defineComponent,
     ref
 } from 'vue';
-import BaseButton from '@/components/base/BaseButton.vue';
+import BaseButton from '#ssr/components/base/BaseButton.js';
 export default defineComponent({
     name: 'Greeting',
     components: { BaseButton },
