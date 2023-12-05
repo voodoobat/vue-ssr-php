@@ -1,21 +1,22 @@
 import { resolve } from 'path'
-import { readFileSync, writeFileSync } from 'fs'
+import { readFileSync, writeFileSync, existsSync } from 'fs'
 import compilerSfc from '@vue/compiler-sfc'
 import esprima from 'esprima'
 import escodegen from 'escodegen'
 import yargs from 'yargs'
+import ts from 'typescript'
 
 const argv = yargs(process.argv).argv
 const path = resolve(`./src/components/${argv.component}.vue`)
 
 const compile2ssr = (path2component) => {
-    console.log('Compile...')
     const src = readFileSync(path2component)
     const {
         descriptor: { script, template },
     } = compilerSfc.parse(src.toString())
 
-    const parsed = esprima.parseModule(script.content)
+    const jsSrc = ts.transpile(script.content, { target: 'es2015' })
+    const parsed = esprima.parseModule(jsSrc)
     const cleanTemplate = template.content.replace(/(\r\n|\n|\r)/gm, '').replaceAll('    ', '')
 
     parsed.body.forEach((node) => {
@@ -26,7 +27,7 @@ const compile2ssr = (path2component) => {
 
             if (isLocalFile && isVueComponent) {
                 const path = node.source.value.replace('@', './src')
-                compile2ssr(path)
+                compile2ssr(resolve(path))
             }
 
             if (isLocalFile) {
@@ -49,10 +50,9 @@ const compile2ssr = (path2component) => {
     })
 
     const code = escodegen.generate(parsed)
+    const path2ssrComponent = path2component.replace('src', 'ssr').replace('.vue', '.js')
 
-    writeFileSync(path2component.replace('./src', './ssr').replace('.vue', '.js'), code, {
-        recursive: true,
-    })
+    writeFileSync(path2ssrComponent, code)
 }
 
 compile2ssr(path)
