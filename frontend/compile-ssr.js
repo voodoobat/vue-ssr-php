@@ -6,8 +6,15 @@ import escodegen from 'escodegen'
 import yargs from 'yargs'
 import ts from 'typescript'
 
+import { writeFileSyncRecursive } from './scripts/write-file-sync-recursive.js'
+
 const argv = yargs(process.argv).argv
 const path = resolve(`./src/components/${argv.component}.vue`)
+
+const compile2js = (path2ts) => {
+    const src = readFileSync(path2component)
+    const jsSrc = ts.transpile(src, { target: 'es2015' })
+}
 
 const compile2ssr = (path2component) => {
     const src = readFileSync(path2component)
@@ -52,7 +59,7 @@ const compile2ssr = (path2component) => {
     const code = escodegen.generate(parsed)
     const path2ssrComponent = path2component.replace('src', 'ssr').replace('.vue', '.js')
 
-    writeFileSync(path2ssrComponent, code)
+    writeFileSyncRecursive(path2ssrComponent, code)
 }
 
 compile2ssr(path)
