@@ -4,7 +4,7 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import Greeting from './components/Greeting.vue'
+import Greeting from '@/components/Greeting.vue'
 
 const message = ref('')
 onMounted(async () => {

@@ -4,12 +4,10 @@ import yargs from 'yargs'
 
 const argv = yargs(process.argv).argv
 
-const Component = await import(`./ssr/components/${argv.component}.js`)
+const Component = (await import(`./ssr/components/${argv.component}.js`)).default
 const app = createSSRApp({
-    components: { Component: Component.default },
-    data: () => ({
-        props: argv.data ? JSON.parse(argv.data) : {},
-    }),
+    components: { Component },
+    data: () => ({ props: argv.data ? JSON.parse(argv.data) : {} }),
     template: `
         <div data-component="${argv.component}">
             <Component v-bind="props" />

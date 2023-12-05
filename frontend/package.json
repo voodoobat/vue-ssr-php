@@ -10,6 +10,8 @@
         "ssr": "ts-node ./compile-ssr.ts"
     },
     "dependencies": {
+        "escodegen": "^2.1.0",
+        "esprima": "^4.0.1",
         "vue": "^3.3.8"
     },
     "devDependencies": {

@@ -6,10 +6,9 @@
 
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue'
-import BaseButton from './base/BaseButton.vue'
+import BaseButton from '@/components/base/BaseButton.vue'
 
 export default defineComponent({
-    // @@template
     name: 'Greeting',
     components: {
         BaseButton,
