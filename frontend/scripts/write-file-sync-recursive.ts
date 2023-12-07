@@ -1,6 +1,6 @@
 import { existsSync, mkdirSync, writeFileSync } from 'fs'
 
-export const writeFileSyncRecursive = (filename, content, charset = 'UTF-8') => {
+export const writeFileSyncRecursive = (filename: string, content: string) => {
     let filepath = filename.replace(/\\/g, '/')
     let root = ''
 
@@ -21,5 +21,5 @@ export const writeFileSyncRecursive = (filename, content, charset = 'UTF-8') => 
         return path
     }, root)
 
-    writeFileSync(root + filepath, content, charset)
+    writeFileSync(root + filepath, content, 'utf-8')
 }

@@ -4,6 +4,7 @@ import {
     ref
 } from 'vue';
 import BaseButton from '#ssr/components/base/BaseButton.js';
+import { increment } from '#ssr/helpers/increment';
 export default defineComponent({
     name: 'Greeting',
     components: { BaseButton },
@@ -25,10 +26,14 @@ export default defineComponent({
             }
             return `${ clickCount.value } clicks`;
         });
+        const incrementCount = () => {
+            clickCount.value = increment(clickCount.value);
+        };
         return {
             clickCount,
-            clickCountMessage
+            clickCountMessage,
+            incrementCount
         };
     },
-    template: '<h1>{{ message }}</h1><p>{{ clickCountMessage }}</p><BaseButton @click="clickCount++">Click me!</BaseButton>'
+    template: '<h1>{{ message }}</h1><p>{{ clickCountMessage }}</p><BaseButton @click="incrementCount">Click me!</BaseButton>'
 });
