@@ -11,12 +11,12 @@ const processImports = (program: Program) => {
             const value = node.source.value as string
 
             if (value.startsWith('@')) {
-                node.source.value = value.replace('@', '#ssr').replace('.vue', '.js')
-
-                if (!value.endsWith('.vue')) {
-                    compile2js(`${value.replace('@', './src')}.ts`)
-                } else {
+                if (value.endsWith('.vue')) {
+                    node.source.value = value.replace('@', '#ssr').replace('.vue', '.js')
                     compile2js(value.replace('@', './src'))
+                } else {
+                    node.source.value = `${value.replace('@', '#ssr')}.js`
+                    compile2js(`${value.replace('@', './src')}.ts`)
                 }
             }
         }

@@ -4,7 +4,7 @@ import {
     ref
 } from 'vue';
 import BaseButton from '#ssr/components/base/BaseButton.js';
-import { increment } from '#ssr/helpers/increment';
+import { increment } from '#ssr/helpers/increment.js';
 export default defineComponent({
     name: 'Greeting',
     components: { BaseButton },
