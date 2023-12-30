@@ -12,10 +12,10 @@ const processImports = (program: Program) => {
 
             if (value.startsWith('@')) {
                 if (value.endsWith('.vue')) {
-                    node.source.value = value.replace('@', '#ssr').replace('.vue', '.js')
+                    node.source.value = value.replace('@', '#ssr').replace('.vue', '.mjs')
                     compile2js(value.replace('@', './src'))
                 } else {
-                    node.source.value = `${value.replace('@', '#ssr')}.js`
+                    node.source.value = `${value.replace('@', '#ssr')}.mjs`
                     compile2js(`${value.replace('@', './src')}.ts`)
                 }
             }
@@ -68,7 +68,7 @@ export const compile2js = (path: string) => {
         processDefineComponent(program, cleanTemplate)
 
         const code = generate(program)
-        const path2save = path.replace('./src', './ssr').replace('.vue', '.js')
+        const path2save = path.replace('./src', './ssr').replace('.vue', '.mjs')
 
         writeFileSyncRecursive(path2save, code)
     } else {
@@ -78,7 +78,7 @@ export const compile2js = (path: string) => {
         processImports(program)
 
         const code = generate(program)
-        const path2save = path.replace('./src', './ssr').replace('.ts', '.js')
+        const path2save = path.replace('./src', './ssr').replace('.ts', '.mjs')
 
         writeFileSyncRecursive(path2save, code)
     }
